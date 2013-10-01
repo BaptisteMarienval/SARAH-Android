@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="app_name">Client Sarah</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Client S.A.R.A.H.</string>
+    <string name="speak">Speak Now</string>
+    <string name="defaultIP">Enter your Sarah Server IP</string>
+    <string name="send">Send</string>
+
+</resources>
