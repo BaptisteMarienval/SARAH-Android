@@ -73,11 +73,10 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 
                 String txtToSend = txtText.getText().toString();
-                String url = "http://"+txtIP.getText().toString()+"?emulate="+txtToSend;
-                
-                String query ="";
+                   
+                String query ="http://"+txtIP.getText().toString()+"?emulate=";
                 try {
-                    query = URLEncoder.encode(url, "utf-8");
+                    query += URLEncoder.encode(txtToSend, "utf-8");
                     txtURL.setText(query);
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
@@ -97,7 +96,7 @@ public class MainActivity extends Activity {
                 
                 try {
                     HttpClient client = new DefaultHttpClient();  
-                    HttpGet get = new HttpGet(url);
+                    HttpGet get = new HttpGet(query);
                     HttpResponse responseGet = client.execute(get);  
                     HttpEntity resEntityGet = responseGet.getEntity();  
                     if (resEntityGet != null) {  
