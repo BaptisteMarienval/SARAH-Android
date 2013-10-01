@@ -14,6 +14,7 @@ import org.apache.http.util.EntityUtils;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.http.AndroidHttpClient;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.view.Menu;
@@ -83,7 +84,8 @@ public class MainActivity extends Activity {
                 }
                                 
                 try {
-                    HttpClient client = new DefaultHttpClient();  
+                   // HttpClient client = new DefaultHttpClient(); 
+                    HttpClient client = AndroidHttpClient.newInstance("Android");
                     HttpGet get = new HttpGet(query);
                     HttpResponse responseGet = client.execute(get);  
                     HttpEntity resEntityGet = responseGet.getEntity();  
