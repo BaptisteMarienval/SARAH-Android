@@ -91,13 +91,13 @@ public class MainActivity extends Activity {
                     HttpEntity resEntityGet = responseGet.getEntity();  
                     if (resEntityGet != null) {  
                         String response = EntityUtils.toString(resEntityGet);
-                        txtLog.setText(response);
+                        txtLog.setText("Response = "+responseGet.getStatusLine().getStatusCode()+" - "+response);
                     }
                     else {
                         txtLog.setText("Aucune réponse");
                     }
                 } catch (Exception e) {
-                    txtLog.setText(e.getMessage());
+                    txtLog.setText("Exception levée : " +e.getMessage());
                 }
                 
                 
