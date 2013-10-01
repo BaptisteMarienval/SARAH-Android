@@ -1,6 +1,7 @@
 package net.android.clientsarah;
 
-import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import org.apache.http.HttpEntity;
@@ -73,8 +74,17 @@ public class MainActivity extends Activity {
                 
                 String txtToSend = txtText.getText().toString();
                 String url = "http://"+txtIP.getText().toString()+"?emulate="+txtToSend;
-                url = url.replaceAll(" ", "%20");
-                txtURL.setText(url);
+                
+                String query ="";
+                try {
+                    query = URLEncoder.encode(url, "utf-8");
+                    txtURL.setText(query);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                
+                
+
 //                
 //                try {
 // 
