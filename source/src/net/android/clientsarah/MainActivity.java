@@ -3,16 +3,19 @@ package net.android.clientsarah;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -68,17 +71,34 @@ public class MainActivity extends Activity {
 
             public void onClick(View v) {
                 
+                String txtToSend = txtText.getText().toString();
+                String url = "http://"+txtIP.getText().toString()+"?emulate="+txtToSend;
+                url = url.replaceAll(" ", "%20");
+                txtURL.setText(url);
+//                
+//                try {
+// 
+//                    getInputStreamFromUrl(url);
+//    
+//                } catch (ActivityNotFoundException a) {
+//
+//                }
+                
+                
                 try {
-                    
-                    String txtToSend = txtText.getText().toString();
-                    String request = "http://"+txtIP.getText().toString()+"?emulate="+txtToSend;
-                    request = request.replaceAll(" ", "%20");
-                    txtURL.setText(request);
-                    getInputStreamFromUrl(request);
-    
-                } catch (ActivityNotFoundException a) {
-
+                    HttpClient client = new DefaultHttpClient();  
+                    HttpGet get = new HttpGet(url);
+                    HttpResponse responseGet = client.execute(get);  
+                    HttpEntity resEntityGet = responseGet.getEntity();  
+                    if (resEntityGet != null) {  
+                        // do something with the response
+                        String response = EntityUtils.toString(resEntityGet);
+                        Log.i("GET RESPONSE", response);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+                
                 
             }
         });
@@ -111,19 +131,19 @@ public class MainActivity extends Activity {
 		}
 	}
 	
-	public InputStream getInputStreamFromUrl(String url) {
-	    InputStream content = null;
-	    try {
-	      HttpClient httpclient = new DefaultHttpClient();
-	      HttpResponse response = httpclient.execute(new HttpGet(url));
-	      content = response.getEntity().getContent();
-	    } catch (Exception e) {
-	        
-	        Toast t = Toast.makeText(getApplicationContext(),
-	                "Network exception :"+e.getMessage(),
-                    Toast.LENGTH_SHORT);
-            t.show();
-	    }
-	      return content;
-	  }
+//	public InputStream getInputStreamFromUrl(String url) {
+//	    InputStream content = null;
+//	    try {
+//	      HttpClient httpclient = new DefaultHttpClient();
+//	      HttpResponse response = httpclient.execute(new HttpGet(url));
+//	      content = response.getEntity().getContent();
+//	    } catch (Exception e) {
+//	        
+//	        Toast t = Toast.makeText(getApplicationContext(),
+//	                "Network exception :"+e.getMessage(),
+//                    Toast.LENGTH_SHORT);
+//            t.show();
+//	    }
+//	      return content;
+//	  }
 }
