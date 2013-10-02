@@ -37,10 +37,28 @@
         android:inputType="textMultiLine"/>
 
     <Button
-        android:id="@+id/btnSend"
+        android:id="@+id/btnSend1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/send" />
+        android:text="@string/send1" />
+    
+     <Button
+        android:id="@+id/btnSend2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/send2" />
+        
+     <Button
+        android:id="@+id/btnSend3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/send3" />
+            
+     <Button
+        android:id="@+id/btnSend4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/send4" />
 
     <TextView
         android:id="@+id/txtURL"

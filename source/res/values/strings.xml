@@ -6,6 +6,9 @@
     <string name="title_activity_main">Client S.A.R.A.H.</string>
     <string name="speak">Speak Now</string>
     <string name="defaultIP">192.168.0.X:8888</string>
-    <string name="send">Send</string>
+    <string name="send1">Send 1</string>
+    <string name="send2">Send 2</string>
+    <string name="send3">Send 3</string>
+    <string name="send4">Send 4</string>
 
 </resources>
