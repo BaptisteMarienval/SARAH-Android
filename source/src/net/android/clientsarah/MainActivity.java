@@ -7,9 +7,12 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.speech.RecognizerIntent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,18 +27,17 @@ public class MainActivity extends Activity {
 	private ImageButton btnSpeak;
 	private Button btnSend;
 	TextView txtText;
-	TextView txtURL;
-	EditText txtIP;
+	TextView txtInfos;
 	EditText txtLog;
-
+    
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
 		txtText = (TextView) findViewById(R.id.txtText);
-		txtURL = (TextView) findViewById(R.id.txtURL);
-		txtIP = (EditText) findViewById(R.id.txtIP);
+		txtInfos = (TextView) findViewById(R.id.txtInfos);
+
 		txtLog = (EditText) findViewById(R.id.txtLog);
 
 		btnSpeak = (ImageButton) findViewById(R.id.btnSpeak);
@@ -60,26 +62,12 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		// Methode 1 : HttpClient -> HTTPGet
 		btnSend = (Button) findViewById(R.id.btnSend);
 		btnSend.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
 				txtLog.setText("");
-				txtURL.setText("");
-				String txtToSend = txtText.getText().toString();
-				String query = "http://" + txtIP.getText().toString()
-						+ "?emulate=";
-
-				try {
-					query += URLEncoder.encode(txtToSend, "utf-8");
-				} catch (UnsupportedEncodingException e) {
-					txtLog.setText("Exception levée : " + e.toString());
-				}
-				txtURL.setText(query);
-				
-				ConnectTask req = new ConnectTask();
-				req.execute(query);
+				sendReq();
 				
 			}
 		});
@@ -87,9 +75,34 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_main, menu);
+		getMenuInflater().inflate(R.menu.activity_menu, menu);
+        SharedPreferences sharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        String port = sharedPrefs.getString("pref_portLabel", "8888");
+        String ip = sharedPrefs.getString("pref_ipLabel", "192.168.0.X");
+        
+        txtInfos.setText(ip+":"+port);
 		return true;
 	}
+	
+	
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	        case R.id.menu_about:
+	        startActivity(new Intent(this, AboutActivity.class));
+	        return true;
+	        case R.id.menu_help:
+	        startActivity(new Intent(this, HelpActivity.class));
+	        return true;
+	        case R.id.menu_settings:
+	        startActivity(new Intent(this, SettingsActivity.class));
+	        return true;
+	        default:
+	        return super.onOptionsItemSelected(item);
+	    }
+	}
+	
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -109,4 +122,27 @@ public class MainActivity extends Activity {
 
 		}
 	}
+	
+	void sendReq() {
+        SharedPreferences sharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(this);
+ 
+        String port = sharedPrefs.getString("pref_portLabel", "8888");
+        String ip = sharedPrefs.getString("pref_ipLabel", "192.168.0.X");
+           
+        String txtToSend = txtText.getText().toString();
+
+        String query = "http://" + ip+":"+port+ "?emulate=";
+
+        try {
+            query += URLEncoder.encode(txtToSend, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            txtLog.setText("Exception levï¿½e : " + e.toString());
+        }
+        //txtURL.setText(query);
+        
+        ConnectTask req = new ConnectTask();
+        req.execute(query);
+        
+    }
 }

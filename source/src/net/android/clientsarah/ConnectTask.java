@@ -18,22 +18,6 @@ public class ConnectTask extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... query) {
-//        HttpClient httpclient = new DefaultHttpClient();
-//        // Prepare a request object
-//        HttpGet httpget = new HttpGet(query.toString());
-//        // Execute the request
-//        HttpResponse httpResponse;
-//        String response = "";
-//        try {
-//        	httpResponse = httpclient.execute(httpget);
-//            response = httpResponse.toString();
-//        } catch (ClientProtocolException e) {
-//        	response = e.toString();
-//        } catch (IOException e) {
-//        	response = e.toString();
-//        }
-//        return response;
-//    }   
     
     HttpClient httpclient = new DefaultHttpClient();
     HttpResponse response;
@@ -53,9 +37,9 @@ public class ConnectTask extends AsyncTask<String, String, String> {
             throw new IOException(statusLine.getReasonPhrase());
         }
     } catch (ClientProtocolException e) {
-        //TODO Handle problems..
+        responseString = e.toString();
     } catch (IOException e) {
-        //TODO Handle problems..
+        responseString = e.toString();
     }
     return responseString;
     }
