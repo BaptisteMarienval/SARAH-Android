@@ -144,5 +144,8 @@ public class MainActivity extends Activity {
         ConnectTask req = new ConnectTask();
         req.execute(query);
         
+        Toast.makeText(getApplicationContext(), "Sending Request : "+query , 1000).show();
+
+        
     }
 }
