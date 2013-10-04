@@ -14,6 +14,8 @@ import android.speech.RecognizerIntent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -34,12 +36,12 @@ public class MainActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		
 		txtText = (TextView) findViewById(R.id.txtText);
 		txtInfos = (TextView) findViewById(R.id.txtInfos);
 
 		txtLog = (EditText) findViewById(R.id.txtLog);
-
+		
 		btnSpeak = (ImageButton) findViewById(R.id.btnSpeak);
 		btnSpeak.setOnClickListener(new View.OnClickListener() {
 
@@ -61,6 +63,22 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
+		
+		WebView wv1 = (WebView)findViewById(R.id.webView);
+		//wv1.loadDataWithBaseURL(null, "http://www.google.fr", "text/html", "utf-8", null);
+		//wv1.getSettings().setJavaScriptEnabled(true);
+		//wv1.loadUrl("http://www.google.com");
+		wv1.setWebViewClient(new MyWebViewClient());		
+		
+		String url = "http://www.google.com";
+		wv1.getSettings().setJavaScriptEnabled(true);
+		wv1.loadUrl(url);
+
+		
+		 //String customHtml = "<html><body><h1>Hello, WebView</h1>" +
+         //        "<h1>Heading 1</h1><p>This is a sample paragraph.</p>" +
+          //       "</body></html>";
+		// wv1.loadData(customHtml, "text/html", "UTF-8");
 
 		btnSend = (Button) findViewById(R.id.btnSend);
 		btnSend.setOnClickListener(new View.OnClickListener() {
@@ -147,5 +165,14 @@ public class MainActivity extends Activity {
         Toast.makeText(getApplicationContext(), "Sending Request : "+query , 1000).show();
 
         
-    }
+    }	
+	
+	public static class MyWebViewClient extends WebViewClient {
+	    @Override
+	    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+	        view.loadUrl(url);
+            return true;
+
+	    }
+	}
 }

@@ -1,55 +1,68 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_above="@+id/textView1"
-    android:layout_toLeftOf="@+id/textView1"
-    android:gravity="center"
-    android:orientation="vertical"
+    android:layout_margin="@dimen/padding_small"
     tools:context=".MainActivity" >
 
-    <ImageButton
-        android:id="@+id/btnSpeak"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:contentDescription="@string/speak"
-        android:src="@android:drawable/ic_btn_speak_now" />
+     <TextView
+         android:id="@+id/txtInfos"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentTop="true"
+         android:textIsSelectable="false"
+         android:textSize="@dimen/padding_small"
+         android:textStyle="italic" />
 
-    <TextView
-        android:id="@+id/txtText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textIsSelectable="true" />
+     <WebView
+         android:id="@+id/webView"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentRight="true"
+         android:layout_below="@+id/txtLog"
+         android:background="@color/white" />
 
-    <Button
-        android:id="@+id/btnSend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/send" />
+     <TextView
+         android:id="@+id/txtText"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignBaseline="@+id/btnSend"
+         android:layout_alignBottom="@+id/btnSend"
+         android:layout_toLeftOf="@+id/btnSend"
+         android:layout_toRightOf="@+id/btnSpeak"
+         android:textAppearance="?android:attr/textAppearanceLarge"
+         android:textIsSelectable="true" />
 
-    <TextView
-        android:id="@+id/txtInfos"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_weight="0.02"
-        android:textIsSelectable="false"
-        android:textSize="@dimen/padding_small" />
+     <EditText
+         android:id="@+id/txtLog"
+         android:layout_width="226dp"
+         android:layout_height="wrap_content"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentRight="true"
+         android:layout_below="@+id/btnSpeak"
+         android:ems="10"
+         android:inputType="textMultiLine" />
 
-    <EditText
-        android:id="@+id/txtLog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textMultiLine" />
+     <ImageButton
+         android:id="@+id/btnSpeak"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentLeft="true"
+         android:layout_alignTop="@+id/btnSend"
+         android:contentDescription="@string/speak"
+         android:scaleType="fitStart"
+         android:src="@android:drawable/ic_btn_speak_now" />
 
-</LinearLayout>
+     <Button
+         android:id="@+id/btnSend"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentRight="true"
+         android:layout_below="@+id/txtInfos"
+         android:layout_marginTop="17dp"
+         android:text="@string/send" />
+     
+</RelativeLayout>
