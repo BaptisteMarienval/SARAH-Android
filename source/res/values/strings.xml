@@ -8,10 +8,11 @@
     <string name="title_activity_main">S.A.R.A.H.</string>
     <string name="speak">Speak Now</string>
     <string name="send">Send</string>
+    <string name="labelPlug">Liste des plugins disponibles :</string>
     
     <string name="pref_user_profile">User Profile</string>
-    <string name="labelIP">IP du serveur SARAH</string>
-    <string name="labelPort">Port du serveur SARAH</string>
+    <string name="labelIP">IP du client SARAH</string>
+    <string name="labelPort">Port du client SARAH</string>
     <string name="pref_sum_ip">Set your IP</string>
     <string name="pref_sum_port">Set your port</string>
     <string name="defaultIP">192.168.0.X</string>

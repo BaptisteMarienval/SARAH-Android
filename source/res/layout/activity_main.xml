@@ -5,64 +5,73 @@
     android:layout_margin="@dimen/padding_small"
     tools:context=".MainActivity" >
 
-     <TextView
-         android:id="@+id/txtInfos"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_alignParentTop="true"
-         android:textIsSelectable="false"
-         android:textSize="@dimen/padding_small"
-         android:textStyle="italic" />
+    <TextView
+        android:id="@+id/txtInfos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/padding_small"
+        android:textStyle="italic" />
 
-     <WebView
-         android:id="@+id/webView"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentBottom="true"
-         android:layout_alignParentLeft="true"
-         android:layout_alignParentRight="true"
-         android:layout_below="@+id/txtLog"
-         android:background="@color/white" />
+    <TextView
+        android:id="@+id/txtText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnSend"
+        android:layout_alignBottom="@+id/btnSend"
+        android:layout_toLeftOf="@+id/btnSend"
+        android:layout_toRightOf="@+id/btnSpeak"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textIsSelectable="true" />
 
-     <TextView
-         android:id="@+id/txtText"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignBaseline="@+id/btnSend"
-         android:layout_alignBottom="@+id/btnSend"
-         android:layout_toLeftOf="@+id/btnSend"
-         android:layout_toRightOf="@+id/btnSpeak"
-         android:textAppearance="?android:attr/textAppearanceLarge"
-         android:textIsSelectable="true" />
+    <EditText
+        android:id="@+id/txtLog"
+        android:layout_width="226dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/btnSpeak"
+        android:ems="10"
+        android:inputType="textMultiLine" />
 
-     <EditText
-         android:id="@+id/txtLog"
-         android:layout_width="226dp"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_alignParentRight="true"
-         android:layout_below="@+id/btnSpeak"
-         android:ems="10"
-         android:inputType="textMultiLine" />
+    <ImageButton
+        android:id="@+id/btnSpeak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/btnSend"
+        android:contentDescription="@string/speak"
+        android:scaleType="fitStart"
+        android:src="@android:drawable/ic_btn_speak_now" />
 
-     <ImageButton
-         android:id="@+id/btnSpeak"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_alignTop="@+id/btnSend"
-         android:contentDescription="@string/speak"
-         android:scaleType="fitStart"
-         android:src="@android:drawable/ic_btn_speak_now" />
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/txtInfos"
+        android:layout_marginTop="17dp"
+        android:text="@string/send" />
 
-     <Button
-         android:id="@+id/btnSend"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentRight="true"
-         android:layout_below="@+id/txtInfos"
-         android:layout_marginTop="17dp"
-         android:text="@string/send" />
-     
+    <TextView
+        android:id="@+id/labelPlugins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/txtLog"
+        android:layout_marginTop="87dp"
+        android:ems="10"
+        android:text="@string/labelPlug" />
+
+    <TextView
+        android:id="@+id/listPlugins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/labelPlugins"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/labelPlugins"
+        android:layout_toRightOf="@+id/labelPlugins" />
+
 </RelativeLayout>

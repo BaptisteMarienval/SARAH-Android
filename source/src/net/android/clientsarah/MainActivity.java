@@ -31,16 +31,24 @@ public class MainActivity extends Activity {
 	TextView txtText;
 	TextView txtInfos;
 	EditText txtLog;
+	TextView txtlistPlugins;
+	JSoup jsoup;
+	    
     
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+	    jsoup = new JSoup();
+	    jsoup.execute("http://10.0.2.2:8080");
+		
 		txtText = (TextView) findViewById(R.id.txtText);
 		txtInfos = (TextView) findViewById(R.id.txtInfos);
 
 		txtLog = (EditText) findViewById(R.id.txtLog);
+		
+		txtlistPlugins = (TextView)findViewById(R.id.listPlugins);
 		
 		btnSpeak = (ImageButton) findViewById(R.id.btnSpeak);
 		btnSpeak.setOnClickListener(new View.OnClickListener() {
@@ -64,22 +72,8 @@ public class MainActivity extends Activity {
 			}
 		});
 		
-		WebView wv1 = (WebView)findViewById(R.id.webView);
-		//wv1.loadDataWithBaseURL(null, "http://www.google.fr", "text/html", "utf-8", null);
-		//wv1.getSettings().setJavaScriptEnabled(true);
-		//wv1.loadUrl("http://www.google.com");
-		wv1.setWebViewClient(new MyWebViewClient());		
+		txtlistPlugins.setText(jsoup.getResult());
 		
-		String url = "http://www.google.com";
-		wv1.getSettings().setJavaScriptEnabled(true);
-		wv1.loadUrl(url);
-
-		
-		 //String customHtml = "<html><body><h1>Hello, WebView</h1>" +
-         //        "<h1>Heading 1</h1><p>This is a sample paragraph.</p>" +
-          //       "</body></html>";
-		// wv1.loadData(customHtml, "text/html", "UTF-8");
-
 		btnSend = (Button) findViewById(R.id.btnSend);
 		btnSend.setOnClickListener(new View.OnClickListener() {
 
@@ -100,6 +94,7 @@ public class MainActivity extends Activity {
         String ip = sharedPrefs.getString("pref_ipLabel", "192.168.0.X");
         
         txtInfos.setText(ip+":"+port);
+        txtlistPlugins.setText(jsoup.getResult());
 		return true;
 	}
 	
@@ -139,6 +134,7 @@ public class MainActivity extends Activity {
 		}
 
 		}
+		txtlistPlugins.setText(jsoup.getResult());
 	}
 	
 	void sendReq() {
@@ -167,12 +163,4 @@ public class MainActivity extends Activity {
         
     }	
 	
-	public static class MyWebViewClient extends WebViewClient {
-	    @Override
-	    public boolean shouldOverrideUrlLoading(WebView view, String url) {
-	        view.loadUrl(url);
-            return true;
-
-	    }
-	}
 }
